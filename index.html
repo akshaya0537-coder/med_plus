@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedPulse - Hospital Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <!-- SVG Icon for MedPulse Brand -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 10.5h-5.5V5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v5.5H5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h5.5V19c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5.5H19c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z"/>
+                </svg>
+                <span>MedPulse</span>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-target="dashboard">
+                    <a href="#">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item" data-target="patients">
+                    <a href="#">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>Patients</span>
+                    </a>
+                </li>
+                <li class="menu-item" data-target="doctors">
+                    <a href="#">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li class="menu-item" data-target="appointments">
+                    <a href="#">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        <span>Appointments</span>
+                    </a>
+                </li>
+                <li class="menu-item" data-target="billing">
+                    <a href="#">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <span>Billing</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <span>© 2026 MedPulse Inc.</span>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <div class="header-title">
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Theme">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <div class="user-info">
+                            <span class="user-name">Dr. Alex Davis</span>
+                            <span class="user-role">Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Workspace Panels -->
+            <div class="workspace">
+                
+                <!-- Dashboard Panel -->
+                <div id="dashboard" class="view-panel active">
+                    <div class="card hero-banner-card" style="margin-bottom: 24px; overflow: hidden; background: linear-gradient(135deg, var(--primary), #312e81); color: white; position: relative;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 28px 32px; gap: 20px; flex-wrap: wrap;">
+                            <div style="max-width: 550px; z-index: 2;">
+                                <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 8px;">Welcome to MedPulse HMS</h2>
+                                <p style="opacity: 0.9; font-size: 0.95rem; line-height: 1.5; margin-bottom: 16px;">Streamlined hospital administrative workflows, patient registrations, scheduling, and billing management in one unified platform.</p>
+                                <button class="btn" style="background: white; color: var(--primary); font-weight: 700;" onclick="app.switchTab('appointments')">Book New Appointment</button>
+                            </div>
+                            <div style="z-index: 1;">
+                                <img src="hero_banner.png" alt="Hospital Banner" style="max-height: 160px; border-radius: 12px; box-shadow: var(--shadow-lg); object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Total Patients</h3>
+                                <div class="stat-value" id="stat-total-patients">0</div>
+                            </div>
+                            <div class="stat-icon success">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Active Doctors</h3>
+                                <div class="stat-value" id="stat-active-doctors">0</div>
+                            </div>
+                            <div class="stat-icon primary">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Appointments Today</h3>
+                                <div class="stat-value" id="stat-appointments-today">0</div>
+                            </div>
+                            <div class="stat-icon warning">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-details">
+                                <h3>Total Revenue</h3>
+                                <div class="stat-value" id="stat-revenue">$0</div>
+                            </div>
+                            <div class="stat-icon danger">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Patient Admissions & Appointments (Last 6 Months)</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-placeholder">
+                                    <div class="chart-bar-container"><div class="chart-bar" style="height: 40%"></div><span class="chart-label">Feb</span></div>
+                                    <div class="chart-bar-container"><div class="chart-bar" style="height: 55%"></div><span class="chart-label">Mar</span></div>
+                                    <div class="chart-bar-container"><div class="chart-bar" style="height: 75%"></div><span class="chart-label">Apr</span></div>
+                                    <div class="chart-bar-container"><div class="chart-bar" style="height: 60%"></div><span class="chart-label">May</span></div>
+                                    <div class="chart-bar-container"><div class="chart-bar" style="height: 90%"></div><span class="chart-label">Jun</span></div>
+                                    <div class="chart-bar-container"><div class="chart-bar" style="height: 80%"></div><span class="chart-label">Jul</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="card-title">Today's Schedule</span>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Patient</th>
+                                                <th>Doctor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dashboard-schedule-list">
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; color: var(--text-muted);">No appointments booked for today.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Patients Panel -->
+                <div id="patients" class="view-panel">
+                    <div class="search-filter-bar">
+                        <div class="search-input-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="form-control" id="search-patients" placeholder="Search patients by name, ID, or phone...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-add-patient">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Add Patient
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Patient ID</th>
+                                            <th>Name</th>
+                                            <th>Age / Gender</th>
+                                            <th>Phone</th>
+                                            <th>Medical History</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="patients-table-body">
+                                        <!-- Dynamic data -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Doctors Panel -->
+                <div id="doctors" class="view-panel">
+                    <div class="search-filter-bar">
+                        <div class="search-input-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="form-control" id="search-doctors" placeholder="Search doctors by name or specialty...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-add-doctor">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Add Doctor
+                        </button>
+                    </div>
+                    
+                    <div class="card-grid" id="doctors-cards-container">
+                        <!-- Dynamic Doctor Cards -->
+                    </div>
+                </div>
+                
+                <!-- Appointments Panel -->
+                <div id="appointments" class="view-panel">
+                    <div class="search-filter-bar">
+                        <div class="search-input-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="form-control" id="search-appointments" placeholder="Search by patient or doctor name...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-book-appointment">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Book Appointment
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date & Time</th>
+                                            <th>Patient</th>
+                                            <th>Doctor</th>
+                                            <th>Purpose</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="appointments-table-body">
+                                        <!-- Dynamic appointments -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Billing Panel -->
+                <div id="billing" class="view-panel">
+                    <div class="search-filter-bar">
+                        <div class="search-input-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" class="form-control" id="search-billing" placeholder="Search bills by patient name or invoice ID...">
+                        </div>
+                        <button class="btn btn-primary" id="btn-create-invoice">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Generate Invoice
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice ID</th>
+                                            <th>Patient</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="billing-table-body">
+                                        <!-- Dynamic invoices -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+    
+    <!-- MODALS -->
+    
+    <!-- Patient Modal -->
+    <div class="modal-overlay" id="patientModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="patient-modal-title">Register Patient</h3>
+                <button class="modal-close" onclick="closeModal('patientModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="patient-form">
+                    <input type="hidden" id="patient-id-field">
+                    <div class="form-group">
+                        <label for="patient-name">Full Name</label>
+                        <input type="text" id="patient-name" class="form-control" required placeholder="e.g. John Doe">
+                    </div>
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <label for="patient-age">Age</label>
+                            <input type="number" id="patient-age" class="form-control" required min="0" max="150" placeholder="e.g. 35">
+                        </div>
+                        <div>
+                            <label for="patient-gender">Gender</label>
+                            <select id="patient-gender" class="form-control" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-phone">Phone Number</label>
+                        <input type="tel" id="patient-phone" class="form-control" required placeholder="e.g. +1 555 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="patient-history">Medical History / Notes</label>
+                        <textarea id="patient-history" class="form-control" rows="3" placeholder="Allergies, conditions, regular medications..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('patientModal')">Cancel</button>
+                <button class="btn btn-primary" type="submit" form="patient-form">Save Patient</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Doctor Modal -->
+    <div class="modal-overlay" id="doctorModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="doctor-modal-title">Add Doctor</h3>
+                <button class="modal-close" onclick="closeModal('doctorModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="doctor-form">
+                    <input type="hidden" id="doctor-id-field">
+                    <div class="form-group">
+                        <label for="doctor-name">Full Name</label>
+                        <input type="text" id="doctor-name" class="form-control" required placeholder="e.g. Dr. Jane Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor-specialty">Specialty</label>
+                        <input type="text" id="doctor-specialty" class="form-control" required placeholder="e.g. Cardiology, Pediatrics">
+                    </div>
+                    <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <label for="doctor-phone">Phone</label>
+                            <input type="tel" id="doctor-phone" class="form-control" required placeholder="Phone number">
+                        </div>
+                        <div>
+                            <label for="doctor-consultation">Consultation Fee ($)</label>
+                            <input type="number" id="doctor-consultation" class="form-control" required min="0" placeholder="Fee">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor-schedule">Availability Schedule</label>
+                        <input type="text" id="doctor-schedule" class="form-control" required placeholder="e.g. Mon-Fri 09:00 - 17:00">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('doctorModal')">Cancel</button>
+                <button class="btn btn-primary" type="submit" form="doctor-form">Save Doctor</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Appointment Modal -->
+    <div class="modal-overlay" id="appointmentModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 id="appointment-modal-title">Book Appointment</h3>
+                <button class="modal-close" onclick="closeModal('appointmentModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="appointment-form">
+                    <input type="hidden" id="appointment-id-field">
+                    <div class="form-group">
+                        <label for="appointment-patient">Select Patient</label>
+                        <select id="appointment-patient" class="form-control" required>
+                            <!-- Dynamic Patients -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointment-doctor">Select Doctor</label>
+                        <select id="appointment-doctor" class="form-control" required>
+                            <!-- Dynamic Doctors -->
+                        </select>
+                    </div>
+                    <div class="form-group" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px;">
+                        <div>
+                            <label for="appointment-date">Date & Time</label>
+                            <input type="datetime-local" id="appointment-date" class="form-control" required>
+                        </div>
+                        <div>
+                            <label for="appointment-status">Status</label>
+                            <select id="appointment-status" class="form-control" required>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointment-purpose">Purpose of Visit</label>
+                        <input type="text" id="appointment-purpose" class="form-control" required placeholder="e.g. General checkup, follow-up">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('appointmentModal')">Cancel</button>
+                <button class="btn btn-primary" type="submit" form="appointment-form">Save Appointment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Billing Modal (Generate Invoice) -->
+    <div class="modal-overlay" id="billingModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Generate Patient Invoice</h3>
+                <button class="modal-close" onclick="closeModal('billingModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="billing-form">
+                    <div class="form-group">
+                        <label for="bill-patient">Patient</label>
+                        <select id="bill-patient" class="form-control" required>
+                            <!-- Dynamic Patients -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bill-doctor">Consulting Doctor (Adds Fee)</label>
+                        <select id="bill-doctor" class="form-control" required>
+                            <!-- Dynamic Doctors -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Additional Services / Procedures</label>
+                        <div id="additional-services-list" style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Dynamic Checkboxes -->
+                        </div>
+                    </div>
+                    
+                    <div class="bill-summary">
+                        <div class="bill-line">
+                            <span>Consultation Fee:</span>
+                            <span id="summary-consultation">$0.00</span>
+                        </div>
+                        <div class="bill-line">
+                            <span>Procedures & Lab:</span>
+                            <span id="summary-procedures">$0.00</span>
+                        </div>
+                        <div class="bill-line total">
+                            <span>Total Due:</span>
+                            <span id="summary-total">$0.00</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('billingModal')">Cancel</button>
+                <button class="btn btn-primary" type="submit" form="billing-form">Generate Invoice</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Invoice View Modal -->
+    <div class="modal-overlay" id="invoiceViewModal">
+        <div class="modal-container" style="max-width: 650px;">
+            <div class="modal-header">
+                <h3>Invoice Details</h3>
+                <button class="modal-close" onclick="closeModal('invoiceViewModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="invoice-details-content">
+                <!-- Dynamic Invoice Print Layout -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-print-invoice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    Print Invoice
+                </button>
+                <button class="btn btn-secondary" id="btn-mark-paid">Mark as Paid</button>
+                <button class="btn btn-primary" onclick="closeModal('invoiceViewModal')">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
